@@ -1,0 +1,156 @@
+.section {
+  padding: 6rem 2rem;
+  background: #0a0820;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.label {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--purple-light);
+  margin-bottom: 0.8rem;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.8rem;
+}
+
+.sub {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.sub a {
+  color: var(--purple-light);
+  transition: color 0.2s;
+}
+
+.sub a:hover {
+  color: var(--white);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.card:hover {
+  border-color: rgba(124, 92, 252, 0.35);
+  transform: translateY(-4px);
+}
+
+.card.featured {
+  background: rgba(124, 92, 252, 0.1);
+  border-color: rgba(124, 92, 252, 0.28);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(124, 92, 252, 0.12);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.levelBadge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--purple-light);
+  background: rgba(124, 92, 252, 0.14);
+  padding: 0.28rem 0.65rem;
+  border-radius: 100px;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.cardDesc {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.55);
+  flex: 1;
+}
+
+.topics {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.topics li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.dot {
+  color: var(--purple-light);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.cardCta {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--purple-light);
+  transition: color 0.2s;
+  margin-top: 0.4rem;
+}
+
+.cardCta:hover {
+  color: var(--white);
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 4rem 1.5rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

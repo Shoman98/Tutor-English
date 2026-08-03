@@ -1,0 +1,137 @@
+.section {
+  padding: 6rem 2rem;
+  background: #0b0930;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.label {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--purple-light);
+  margin-bottom: 0.8rem;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.8rem;
+  line-height: 1.1;
+}
+
+.heading em {
+  font-style: italic;
+  color: var(--purple-soft);
+}
+
+.sub {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.45);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.bar {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.4rem 1.8rem;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.25s;
+}
+
+.bar:hover:not(.barOpen) {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.13);
+}
+
+.barOpen {
+  border-color: transparent;
+}
+
+.barHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.barLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.barEmoji {
+  font-size: 1.3rem;
+  width: 46px;
+  height: 46px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.barTitle {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.barChevron {
+  font-size: 1.6rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 300;
+  line-height: 1;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.barOpen .barChevron {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.barDesc {
+  margin-top: 1rem;
+  font-size: 0.93rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.82);
+  padding-left: calc(46px + 1rem);
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 4rem 1.5rem;
+  }
+
+  .barDesc {
+    padding-left: 0;
+    margin-top: 0.75rem;
+  }
+
+  .bar {
+    padding: 1.2rem 1.3rem;
+  }
+}
