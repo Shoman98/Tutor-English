@@ -87,23 +87,17 @@
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
-  width: 48px;
+  width: 20px;
 }
 
-.stepNum {
-  width: 48px;
-  height: 48px;
+.stepDot {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: rgba(124, 92, 252, 0.2);
-  border: 1px solid rgba(124, 92, 252, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--purple-light);
-  letter-spacing: 0.5px;
+  background: var(--purple);
+  border: 2px solid rgba(124, 92, 252, 0.5);
   flex-shrink: 0;
+  margin-top: 6px;
 }
 
 .stepLine {
@@ -115,24 +109,8 @@
 }
 
 .stepBody {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
   padding-bottom: 2.2rem;
   flex: 1;
-}
-
-.stepIcon {
-  font-size: 1.3rem;
-  width: 44px;
-  height: 44px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 2px;
 }
 
 .stepTitle {
