@@ -1,55 +1,63 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Journey.module.css';
 
-const steps = [
+const milestones = [
   {
-    title: 'Take the Level Test',
-    desc: 'A quick 8-question quiz reveals exactly where you are — no guessing, no wasted time.',
+    num: 1,
+    title: 'Beginner Forest',
+    desc: 'Build the roots: greetings, basics, first conversations.',
   },
   {
-    title: 'Get Your Custom Plan',
-    desc: 'Eka designs a program around your level, goals, and schedule. No one-size-fits-all.',
+    num: 2,
+    title: 'Conversation City',
+    desc: 'Navigate everyday life with ease and personality.',
   },
   {
-    title: 'Learn Through Conversation',
-    desc: 'Real sessions, real communication. You speak from day one — no memorization drills.',
+    num: 3,
+    title: 'Fluency Mountain',
+    desc: 'Speak with nuance, opinion, and rhythm.',
   },
   {
-    title: 'Reach Your Goal',
-    desc: 'Feel the difference in every conversation — at work, while travelling, or in daily life.',
+    num: 4,
+    title: 'Confidence Universe',
+    desc: 'Own any room — interview, exam, stage.',
   },
 ];
 
 export default function Journey() {
   return (
     <section className={styles.section} id="journey">
-      <div className={styles.bg} />
-      <div className={styles.overlay} />
-
       <div className={styles.container}>
-        <div className={styles.header}>
+        <div className={styles.imageWrap}>
+          <Image
+            src="/journey-map.jpg"
+            alt="Your English journey"
+            fill
+            style={{ objectFit: 'cover' }}
+          />
+        </div>
+
+        <div className={styles.textBlock}>
           <span className={styles.label}>Your Journey</span>
           <h2 className={styles.heading}>
-            From first word to
+            From first hello to full
             <br />
-            <em>full fluency</em>
+            <em>fluency</em>.
           </h2>
           <p className={styles.sub}>
-            Every great English speaker started exactly where you are now.
-            Here&apos;s how the journey looks with Eka.
+            Every student has a visual roadmap. Unlock milestones, track
+            streaks, see how far you&apos;ve come.
           </p>
         </div>
 
-        <div className={styles.steps}>
-          {steps.map((s, i) => (
-            <div key={s.title} className={styles.step}>
-              <div className={styles.stepLeft}>
-                <div className={styles.stepDot} />
-                {i < steps.length - 1 && <div className={styles.stepLine} />}
-              </div>
-              <div className={styles.stepBody}>
-                <h3 className={styles.stepTitle}>{s.title}</h3>
-                <p className={styles.stepDesc}>{s.desc}</p>
+        <div className={styles.milestones}>
+          {milestones.map((m) => (
+            <div key={m.num} className={styles.card}>
+              <div className={styles.num}>{m.num}</div>
+              <div className={styles.cardText}>
+                <h3 className={styles.cardTitle}>{m.title}</h3>
+                <p className={styles.cardDesc}>{m.desc}</p>
               </div>
             </div>
           ))}
