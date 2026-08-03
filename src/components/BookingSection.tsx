@@ -1,22 +1,25 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
-import { format, parse, startOfWeek, getDay, isWeekend, startOfDay } from 'date-fns';
-import { enUS } from 'date-fns/locale';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+import {
+  format,
+  addMonths,
+  subMonths,
+  startOfMonth,
+  endOfMonth,
+  startOfWeek,
+  endOfWeek,
+  eachDayOfInterval,
+  isSameMonth,
+  isSameDay,
+  isWeekend,
+  isPast,
+  startOfDay,
+  isToday,
+} from 'date-fns';
 import { supabase } from '@/lib/supabase';
 import styles from './BookingSection.module.css';
-
-const locales = { 'en-US': enUS };
-const localizer = dateFnsLocalizer({
-  format,
-  parse,
-  startOfWeek: () => startOfWeek(new Date(), { weekStartsOn: 1 }),
-  getDay,
-  locales,
-});
 
 const TIME_SLOTS = [
   '09:00', '10:00', '11:00', '12:00',
@@ -29,6 +32,81 @@ const PROGRAMS = [
   'Fluency & Confidence',
   'Polish & Mastery',
 ];
+
+const WEEK_DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+function MiniCalendar({
+  selected,
+  onSelect,
+}: {
+  selected: Date | null;
+  onSelect: (d: Date) => void;
+}) {
+  const [view, setView] = useState(new Date());
+
+  const monthStart = startOfMonth(view);
+  const monthEnd = endOfMonth(view);
+  const gridStart = startOfWeek(monthStart, { weekStartsOn: 1 });
+  const gridEnd = endOfWeek(monthEnd, { weekStartsOn: 1 });
+  const days = eachDayOfInterval({ start: gridStart, end: gridEnd });
+
+  const disabled = (d: Date) =>
+    isWeekend(d) || isPast(startOfDay(d)) && !isToday(d);
+
+  return (
+    <div className={styles.cal}>
+      <div className={styles.calNav}>
+        <button
+          type="button"
+          onClick={() => setView(subMonths(view, 1))}
+          className={styles.calNavBtn}
+        >
+          ‹
+        </button>
+        <span className={styles.calMonth}>{format(view, 'MMMM yyyy')}</span>
+        <button
+          type="button"
+          onClick={() => setView(addMonths(view, 1))}
+          className={styles.calNavBtn}
+        >
+          ›
+        </button>
+      </div>
+
+      <div className={styles.calGrid}>
+        {WEEK_DAYS.map((d) => (
+          <div key={d} className={styles.calWeekDay}>
+            {d}
+          </div>
+        ))}
+
+        {days.map((day) => {
+          const isOtherMonth = !isSameMonth(day, view);
+          const isDisabled = disabled(day);
+          const isSelected = selected !== null && isSameDay(day, selected);
+          const isTodayDay = isToday(day);
+
+          return (
+            <button
+              key={day.toISOString()}
+              type="button"
+              onClick={() => !isDisabled && onSelect(day)}
+              disabled={isDisabled}
+              className={`${styles.calDay}
+                ${isOtherMonth ? styles.calDayOther : ''}
+                ${isDisabled ? styles.calDayDisabled : ''}
+                ${isSelected ? styles.calDaySelected : ''}
+                ${isTodayDay && !isSelected ? styles.calDayToday : ''}
+              `}
+            >
+              {format(day, 'd')}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 export default function BookingSection() {
   const searchParams = useSearchParams();
@@ -46,15 +124,11 @@ export default function BookingSection() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
-  const [currentDate, setCurrentDate] = useState(new Date());
 
-  const handleSelectSlot = useCallback(({ start }: { start: Date }) => {
-    const today = startOfDay(new Date());
-    if (!isWeekend(start) && start >= today) {
-      setSelectedDate(start);
-      setSelectedTime('');
-    }
-  }, []);
+  const handleDateSelect = (date: Date) => {
+    setSelectedDate(date);
+    setSelectedTime('');
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -80,9 +154,7 @@ export default function BookingSection() {
       if (dbError) throw dbError;
       setSubmitted(true);
     } catch {
-      setError(
-        'Something went wrong. Please try again or reach out on WhatsApp.',
-      );
+      setError('Something went wrong. Please try again or reach out on WhatsApp.');
     } finally {
       setSubmitting(false);
     }
@@ -98,7 +170,7 @@ export default function BookingSection() {
           email. Can&apos;t wait to start learning together!
         </p>
         <a
-          href={`https://wa.me/995599921396?text=Hi+Eka!+I+just+booked+a+session.`}
+          href="https://wa.me/995599921396?text=Hi+Eka!+I+just+booked+a+session."
           target="_blank"
           rel="noopener noreferrer"
           className={styles.successWa}
@@ -113,49 +185,20 @@ export default function BookingSection() {
     <div className={styles.wrap}>
       <div className={styles.calCol}>
         <h3 className={styles.colTitle}>Pick a date</h3>
-        <p className={styles.calHint}>Select any available weekday.</p>
-        <div className={styles.calWrap}>
-          <Calendar
-            localizer={localizer}
-            selectable
-            onSelectSlot={handleSelectSlot}
-            defaultView="month"
-            views={['month']}
-            events={[]}
-            style={{ height: 370 }}
-            date={currentDate}
-            onNavigate={(d) => setCurrentDate(d)}
-            dayPropGetter={(date: Date) => {
-              const today = startOfDay(new Date());
-              const isSelected =
-                selectedDate !== null &&
-                format(date, 'yyyy-MM-dd') === format(selectedDate, 'yyyy-MM-dd');
+        <p className={styles.calHint}>Weekdays only — weekends are unavailable.</p>
 
-              if (isWeekend(date) || date < today) {
-                return { style: { opacity: 0.3, cursor: 'not-allowed' } };
-              }
-              if (isSelected) {
-                return {
-                  style: {
-                    background: 'rgba(124, 92, 252, 0.28)',
-                    cursor: 'pointer',
-                  },
-                };
-              }
-              return { style: { cursor: 'pointer' } };
-            }}
-          />
-        </div>
+        <MiniCalendar selected={selectedDate} onSelect={handleDateSelect} />
 
         {selectedDate && (
           <div className={styles.slots}>
             <h4 className={styles.slotsTitle}>
-              {format(selectedDate, 'EEEE, MMM d')}
+              {format(selectedDate, 'EEEE, MMMM d')}
             </h4>
             <div className={styles.slotsGrid}>
               {TIME_SLOTS.map((t) => (
                 <button
                   key={t}
+                  type="button"
                   className={`${styles.slot} ${selectedTime === t ? styles.slotActive : ''}`}
                   onClick={() => setSelectedTime(t)}
                 >
@@ -211,9 +254,7 @@ export default function BookingSection() {
             required
           >
             {PROGRAMS.map((p) => (
-              <option key={p} value={p}>
-                {p}
-              </option>
+              <option key={p} value={p}>{p}</option>
             ))}
           </select>
         </div>
