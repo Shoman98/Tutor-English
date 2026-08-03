@@ -1,6 +1,6 @@
 .section {
   padding: 6rem 2rem;
-  background: #070720;
+  background: #eef0f8;
 }
 
 .container {
@@ -21,17 +21,18 @@
   height: 580px;
   border-radius: 24px;
   overflow: hidden;
-  border: 1px solid rgba(124, 92, 252, 0.18);
+  border: 1px solid rgba(124, 92, 252, 0.15);
+  box-shadow: 0 8px 40px rgba(100, 80, 200, 0.12);
 }
 
 .stat,
 .stat2 {
   position: absolute;
-  background: rgba(7, 7, 32, 0.92);
-  border: 1px solid rgba(124, 92, 252, 0.22);
+  background: #ffffff;
+  border: 1px solid rgba(124, 92, 252, 0.15);
   border-radius: 14px;
   padding: 1rem 1.5rem;
-  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(100, 80, 200, 0.1);
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
@@ -51,12 +52,12 @@
   font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 700;
-  color: var(--white);
+  color: #0d0730;
 }
 
 .statLabel {
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: #9a9ab0;
 }
 
 .textCol {
@@ -70,7 +71,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--purple-light);
+  color: var(--purple);
 }
 
 .heading {
@@ -78,23 +79,23 @@
   font-size: clamp(2rem, 3.5vw, 3rem);
   font-weight: 700;
   line-height: 1.1;
-  color: var(--white);
+  color: #0d0730;
 }
 
 .heading em {
   font-style: italic;
-  color: var(--purple-soft);
+  color: var(--purple-light);
 }
 
 .body {
   font-size: 0.97rem;
   line-height: 1.78;
-  color: rgba(255, 255, 255, 0.6);
+  color: #4a4a6a;
 }
 
 .body em {
   font-style: italic;
-  color: rgba(255, 255, 255, 0.92);
+  color: #0d0730;
 }
 
 .highlights {
@@ -109,11 +110,12 @@
   align-items: center;
   gap: 0.7rem;
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.65);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: #4a4a6a;
+  background: #ffffff;
+  border: 1px solid rgba(124, 92, 252, 0.1);
   border-radius: 12px;
   padding: 0.7rem 0.9rem;
+  box-shadow: 0 2px 8px rgba(100, 80, 200, 0.06);
 }
 
 .cta {
