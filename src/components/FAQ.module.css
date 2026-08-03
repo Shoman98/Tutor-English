@@ -1,0 +1,135 @@
+.section {
+  padding: 6rem 2rem;
+  background: #070720;
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.label {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--purple-light);
+  margin-bottom: 0.8rem;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.heading em {
+  font-style: italic;
+  color: var(--purple-soft);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.item {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.25s;
+}
+
+.item.itemOpen {
+  border-color: rgba(124, 92, 252, 0.3);
+  background: rgba(124, 92, 252, 0.06);
+}
+
+.question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem 1.5rem;
+  background: transparent;
+  border: none;
+  color: var(--white);
+  font-size: 0.97rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.item.itemOpen .question {
+  color: var(--purple-soft);
+}
+
+.chevron {
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.item.itemOpen .chevron {
+  color: var(--purple-light);
+}
+
+.answer {
+  padding: 0 1.5rem 1.3rem;
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.still {
+  margin-top: 3rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.still p {
+  font-size: 0.97rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.stillBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.82rem 1.8rem;
+  background: rgba(124, 92, 252, 0.15);
+  border: 1px solid rgba(124, 92, 252, 0.3);
+  color: var(--purple-light);
+  border-radius: 100px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+
+.stillBtn:hover {
+  background: rgba(124, 92, 252, 0.25);
+  color: var(--white);
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 4rem 1.5rem;
+  }
+}
