@@ -36,11 +36,6 @@ export default function Hero() {
           </div>
 
           <div className={styles.proof}>
-            <div className={styles.avatars}>
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className={`${styles.avatar} ${styles[`av${i}`]}`} />
-              ))}
-            </div>
             <div className={styles.proofText}>
               <div className={styles.stars}>★★★★★</div>
               <span>Loved by 200+ students worldwide</span>
